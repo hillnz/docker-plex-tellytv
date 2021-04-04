@@ -1,4 +1,7 @@
-FROM linuxserver/plex:1.22.1.4275-48e10484b-ls39
+# HACK hardcode major version 1 as renovate only supports 3 version parts
+# renovate: datasource=docker depName=linuxserver/plex versioning=regex:^1\.(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+).+
+ARG PLEX_VERSION=1.22.1.4275-48e10484b-ls39
+FROM linuxserver/plex:${PLEX_VERSION}
 
 ARG TARGETPLATFORM
 
@@ -6,6 +9,8 @@ RUN apt-get update && apt-get install -y \
         ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
+# HACK hardcode "1.1" as prefix as the 1.5 version is not considered ready
+# renovate: datasource=github-tags depName=tellytv/telly versioning=regex:^1\.1\.(?<major>\d+)\.(?<minor>\d+)$
 ARG TELLYTV_VERSION=1.1.0.8
 RUN export TELLY_PLATFORM=$(echo ${TARGETPLATFORM} | sed -E 's#(linux)|/##g') && \
     mkdir -p /opt/tellytv && cd /opt/tellytv && \
