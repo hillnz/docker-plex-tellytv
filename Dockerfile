@@ -1,6 +1,6 @@
 # HACK hardcode major version 1 as renovate only supports 3 version parts
 # renovate: datasource=docker depName=jonoh/plex versioning=regex:^1\.(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+).+
-ARG PLEX_VERSION=1.32.3.7192-7aa441827
+ARG PLEX_VERSION=1.32.4.7195-7c8f9d3b6
 FROM jonoh/plex:${PLEX_VERSION}
 
 ARG TARGETPLATFORM
